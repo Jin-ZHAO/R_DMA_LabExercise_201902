@@ -1,0 +1,33 @@
+Notes for 7 DMA_Optimization:
+
+lpSolveAPI - Mathmatically - datasets/variables - constraints(set.bounds();add.constraints()) 
+- set.objfn(lpmodel,expression) - direction(lp.control(lpmodel,sense='max')) 
+- (wirte.lp(lpmodel,'name.lp',type='lp')
+- solve(lpmodel) - get.objective(lpmodel) - get.variables(lpmodel)
+
+
+  0. Install packages & library of lpSolveAPI
+  1. Formulate the problem mathmatically
+      1.1 Objective Function: maximization or minimization
+      1.2 Contraints
+      
+  2. Formulate the problem as an linear programming problem (lpsolve)
+      2.1 Create Variables / Datasets
+              e.g.  crops = data.frame(type=c('a','b'),cost=c(1,1))
+      2.2 Create a empty model by 'make.lp(a,b)'
+              a = the number of constraints (empty = 0)
+              b = the number of decision variables (IVs)
+      2.3 Add constraints (two types):
+              set.bounds(lpmodelname,lower=c(x,x),upper=c(x,x)) # generally only need one set of boundaries
+              add.constraints(lpmodelname, dataframe$col, '<=', limitation)
+      2.4 Set object function & its direaction
+              set.objfn(lpmodelname, the_expression_in_the_right_of_the_equation)
+              lp.control(lpmodelname, sense='max')  # or sense = 'min'
+      2.5 if wanna check if it is correct, we can write it into a lp file by
+              write.lp(lpmodelname, 'name.lp',type='lp')
+      2.6 Solve the model, expecting to get a '0'
+             solve(lpmodelname)
+      2.7 Get the results and configuration
+             get.objective(lpmodel)
+             get.variables(lpmodel)
+          
